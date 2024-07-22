@@ -15,7 +15,8 @@ var (
 )
 
 type Adgroup struct {
-	Hello string
+	AdgroupId   int64
+	AdgroupName string
 }
 
 // AdgroupRepo is a Greater repo.
@@ -38,8 +39,8 @@ func NewAdgroupUseCase(repo AdgroupRepo, logger log.Logger) *AdgroupUseCase {
 	return &AdgroupUseCase{repo: repo, log: log.NewHelper(logger)}
 }
 
-// CreateGreeter creates a Greeter, and returns the new Greeter.
-func (uc *AdgroupUseCase) CreateGreeter(ctx context.Context, g *Adgroup) (*Adgroup, error) {
-	uc.log.WithContext(ctx).Infof("CreateGreeter: %v", g.Hello)
+// CreateAdgroup creates a Greeter, and returns the new Greeter.
+func (uc *AdgroupUseCase) CreateAdgroup(ctx context.Context, g *Adgroup) (*Adgroup, error) {
+	uc.log.WithContext(ctx).Infof("CreateAdgroup: %v", g.AdgroupName)
 	return uc.repo.Save(ctx, g)
 }

@@ -27,9 +27,9 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	}
 	adgroupRepo := data.NewAdgroupRepo(dataData, logger)
 	adgroupUseCase := biz.NewAdgroupUseCase(adgroupRepo, logger)
-	greeterService := service.NewAdgroupService(adgroupUseCase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
+	adgroupService := service.NewAdgroupService(adgroupUseCase)
+	grpcServer := server.NewGRPCServer(confServer, adgroupService, logger)
+	httpServer := server.NewHTTPServer(confServer, adgroupService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

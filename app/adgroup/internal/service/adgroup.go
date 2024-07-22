@@ -3,6 +3,7 @@ package service
 import (
 	"ad-marketing/app/adgroup/internal/biz"
 	"context"
+	"github.com/jinzhu/copier"
 
 	pb "ad-marketing/api/adgroup/v1"
 )
@@ -20,7 +21,15 @@ func NewAdgroupService(adgroupUseCase *biz.AdgroupUseCase) *AdgroupService {
 }
 
 func (s *AdgroupService) CreateAdgroup(ctx context.Context, req *pb.CreateAdgroupRequest) (*pb.CreateAdgroupReply, error) {
-	return &pb.CreateAdgroupReply{}, nil
+	var adgroupData biz.Adgroup
+	err := copier.Copy(&adgroupData, req)
+	if err != nil {
+		return nil, err
+	}
+	adgroup, err := s.uc.CreateAdgroup(ctx, &adgroupData)
+	return &pb.CreateAdgroupReply{
+		AdgroupId: adgroup.AdgroupId,
+	}, err
 }
 func (s *AdgroupService) UpdateAdgroup(ctx context.Context, req *pb.UpdateAdgroupRequest) (*pb.UpdateAdgroupReply, error) {
 	return &pb.UpdateAdgroupReply{}, nil

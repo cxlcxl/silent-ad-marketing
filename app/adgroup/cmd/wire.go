@@ -6,11 +6,11 @@
 package main
 
 import (
-	"ad-marketing/internal/biz"
-	"ad-marketing/internal/conf"
-	"ad-marketing/internal/data"
-	"ad-marketing/internal/server"
-	"ad-marketing/internal/service"
+	"ad-marketing/app/adgroup/internal/biz"
+	"ad-marketing/app/adgroup/internal/conf"
+	"ad-marketing/app/adgroup/internal/data"
+	"ad-marketing/app/adgroup/internal/server"
+	"ad-marketing/app/adgroup/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"

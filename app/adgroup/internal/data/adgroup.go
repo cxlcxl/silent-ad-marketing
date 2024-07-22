@@ -8,20 +8,23 @@ import (
 )
 
 type adgroupRepo struct {
-	data *Data
-	log  *log.Helper
+	data      *Data
+	log       *log.Helper
+	tableName string
 }
 
 // NewAdgroupRepo .
 func NewAdgroupRepo(data *Data, logger log.Logger) biz.AdgroupRepo {
 	return &adgroupRepo{
-		data: data,
-		log:  log.NewHelper(logger),
+		tableName: "adgroup",
+		data:      data,
+		log:       log.NewHelper(logger),
 	}
 }
 
 func (r *adgroupRepo) Save(ctx context.Context, g *biz.Adgroup) (*biz.Adgroup, error) {
-	return g, nil
+	err := r.data.db.Table(r.tableName).Create(g).Error
+	return g, err
 }
 
 func (r *adgroupRepo) Update(ctx context.Context, g *biz.Adgroup) (*biz.Adgroup, error) {
