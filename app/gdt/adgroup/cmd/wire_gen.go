@@ -32,7 +32,7 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	}
 	adgroupRepo := data.NewAdgroupRepo(dataData, logger)
 	adgroupUseCase := biz.NewAdgroupUseCase(adgroupRepo, logger)
-	adgroupService := service.NewAdgroupService(adgroupUseCase)
+	adgroupService := service.NewAdgroupService(adgroupUseCase, logger)
 	grpcServer := server.NewGRPCServer(confServer, adgroupService, logger)
 	httpServer := server.NewHTTPServer(confServer, adgroupService, logger)
 	app := newApp(logger, grpcServer, httpServer)
