@@ -2,6 +2,7 @@ package service
 
 import (
 	"ad-marketing/app/gdt/adgroup/internal/biz"
+	"ad-marketing/pkg/utils/res_code"
 	"context"
 	"github.com/jinzhu/copier"
 
@@ -15,9 +16,13 @@ func (s *AdgroupService) CreateAdgroup(ctx context.Context, req *pb.CreateAdgrou
 		return nil, err
 	}
 	adgroup, err := s.uc.CreateAdgroup(ctx, &adgroupData)
+	if err != nil {
+		return nil, err
+	}
 	return &pb.CreateAdgroupReply{
-		AdgroupId: adgroup.AdgroupId,
-	}, err
+		ResMsg: res_code.ResOk(),
+		Data:   &pb.CreateAdgroupReply_Data{AdgroupId: adgroup.AdgroupId},
+	}, nil
 }
 func (s *AdgroupService) UpdateAdgroup(ctx context.Context, req *pb.UpdateAdgroupRequest) (*pb.UpdateAdgroupReply, error) {
 	return &pb.UpdateAdgroupReply{}, nil
