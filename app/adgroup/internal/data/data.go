@@ -12,7 +12,7 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewAdgroupRepo)
+var ProviderSet = wire.NewSet(NewData, NewAdgroupRepo, NewDb, NewRedisCmd)
 
 // Data .
 type Data struct {
@@ -21,10 +21,10 @@ type Data struct {
 }
 
 // NewData .
-func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
+func NewData(logger log.Logger, db *gorm.DB, redisCli redis.Cmdable) (*Data, func(), error) {
 	d := &Data{
-		redisCli: newRedisCmd(c, logger),
-		db:       newDb(c, logger),
+		redisCli: redisCli,
+		db:       db,
 	}
 	cleanup := func() {
 		log.NewHelper(logger).Info("closing the data resources")
@@ -32,7 +32,7 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 	return d, cleanup, nil
 }
 
-func newDb(conf *conf.Data, logger log.Logger) *gorm.DB {
+func NewDb(conf *conf.Data, logger log.Logger) *gorm.DB {
 	log := log.NewHelper(log.With(logger, "module", "adgroup-service/data/client"))
 	db, err := gorm.Open(mysql.Open(conf.Database.Source), &gorm.Config{})
 	if err != nil {
@@ -41,7 +41,7 @@ func newDb(conf *conf.Data, logger log.Logger) *gorm.DB {
 	return db
 }
 
-func newRedisCmd(conf *conf.Data, logger log.Logger) redis.Cmdable {
+func NewRedisCmd(conf *conf.Data, logger log.Logger) redis.Cmdable {
 	log := log.NewHelper(log.With(logger, "module", "adgroup-service/data/client"))
 	client := redis.NewClient(&redis.Options{
 		Addr:         conf.Redis.Addr,

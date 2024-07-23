@@ -8,18 +8,6 @@ import (
 	pb "ad-marketing/api/adgroup/v1"
 )
 
-type AdgroupService struct {
-	pb.UnimplementedAdgroupServer
-
-	uc *biz.AdgroupUseCase
-}
-
-func NewAdgroupService(adgroupUseCase *biz.AdgroupUseCase) *AdgroupService {
-	return &AdgroupService{
-		uc: adgroupUseCase,
-	}
-}
-
 func (s *AdgroupService) CreateAdgroup(ctx context.Context, req *pb.CreateAdgroupRequest) (*pb.CreateAdgroupReply, error) {
 	var adgroupData biz.Adgroup
 	err := copier.Copy(&adgroupData, req)
