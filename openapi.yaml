@@ -6,6 +6,81 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /gdt/v1/adgroup:
+        get:
+            tags:
+                - Adgroup
+            operationId: Adgroup_GetAdgroup
+            parameters:
+                - name: adgroupId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gdt.adgroup.v1.GetAdgroupReply'
+        post:
+            tags:
+                - Adgroup
+            operationId: Adgroup_CreateAdgroup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.gdt.adgroup.v1.CreateAdgroupRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gdt.adgroup.v1.CreateAdgroupReply'
+    /gdt/v1/adgroup/list:
+        get:
+            tags:
+                - Adgroup
+            operationId: Adgroup_ListAdgroup
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: adgroupId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: adgroupName
+                  in: query
+                  schema:
+                    type: string
+                - name: advertiserId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.gdt.adgroup.v1.ListAdgroupReply'
     /helloworld/{name}:
         get:
             tags:
@@ -25,40 +100,100 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
-    /v1/adgroup:
-        post:
-            tags:
-                - Adgroup
-            operationId: Adgroup_CreateAdgroup
-            parameters:
-                - name: adgroupId
-                  in: query
-                  schema:
-                    type: string
-                - name: adgroupName
-                  in: query
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.adgroup.v1.CreateAdgroupReply'
 components:
     schemas:
-        api.adgroup.v1.CreateAdgroupReply:
+        api.gdt.adgroup.v1.AdgroupInfo:
             type: object
             properties:
                 adgroupId:
                     type: string
+                adgroupName:
+                    type: string
+                advertiserId:
+                    type: string
+                companyId:
+                    type: string
+                configuredStatus:
+                    type: string
+                beginDate:
+                    type: string
+                endDate:
+                    type: string
+                timeSeries:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+        api.gdt.adgroup.v1.CreateAdgroupReply:
+            type: object
+            properties:
+                resMsg:
+                    $ref: '#/components/schemas/response.ResMsg'
+                data:
+                    $ref: '#/components/schemas/api.gdt.adgroup.v1.CreateAdgroupReply_Data'
+        api.gdt.adgroup.v1.CreateAdgroupReply_Data:
+            type: object
+            properties:
+                adgroupId:
+                    type: string
+        api.gdt.adgroup.v1.CreateAdgroupRequest:
+            type: object
+            properties:
+                adgroup:
+                    $ref: '#/components/schemas/api.gdt.adgroup.v1.AdgroupInfo'
+        api.gdt.adgroup.v1.GetAdgroupReply:
+            type: object
+            properties:
+                adgroups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.gdt.adgroup.v1.AdgroupInfo'
+        api.gdt.adgroup.v1.ListAdgroupReply:
+            type: object
+            properties:
+                resMsg:
+                    $ref: '#/components/schemas/response.ResMsg'
+                data:
+                    $ref: '#/components/schemas/api.gdt.adgroup.v1.ListAdgroupReply_Data'
+        api.gdt.adgroup.v1.ListAdgroupReply_Data:
+            type: object
+            properties:
+                pageInfo:
+                    $ref: '#/components/schemas/response.PageInfo'
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.gdt.adgroup.v1.AdgroupInfo'
         helloworld.v1.HelloReply:
             type: object
             properties:
                 message:
                     type: string
             description: The response message containing the greetings
+        response.PageInfo:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+                totalPage:
+                    type: integer
+                    format: int32
+        response.ResMsg:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    format: int32
+                msg:
+                    type: string
 tags:
     - name: Adgroup
     - name: Greeter

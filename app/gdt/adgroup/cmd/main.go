@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ad-marketing/app/adgroup/internal/conf"
+	"ad-marketing/app/gdt/adgroup/internal/conf"
 	"flag"
 	"os"
 

@@ -1,8 +1,8 @@
 package service
 
 import (
-	pb "ad-marketing/api/adgroup/v1"
-	"ad-marketing/app/adgroup/internal/biz"
+	pb "ad-marketing/api/gdt/adgroup/v1"
+	"ad-marketing/app/gdt/adgroup/internal/biz"
 	"github.com/google/wire"
 )
 

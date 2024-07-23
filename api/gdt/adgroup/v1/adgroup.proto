@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package api.gdt.adgroup.v1;
+
+import "google/api/annotations.proto";
+import "common/response/response.proto";
+
+option go_package = "ad-marketing/api/gdt/adgroup/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.gdt.adgroup.v1";
+
+service Adgroup {
+  rpc CreateAdgroup (CreateAdgroupRequest) returns (CreateAdgroupReply) {
+    option (google.api.http) = {
+      post: "/gdt/v1/adgroup"
+      body: "*"
+    };
+  };
+  rpc UpdateAdgroup (UpdateAdgroupRequest) returns (UpdateAdgroupReply);
+  rpc DeleteAdgroup (DeleteAdgroupRequest) returns (DeleteAdgroupReply);
+  rpc GetAdgroup (GetAdgroupRequest) returns (GetAdgroupReply) {
+    option (google.api.http) = {
+      get: "/gdt/v1/adgroup"
+    };
+  };
+  rpc ListAdgroup (ListAdgroupRequest) returns (ListAdgroupReply) {
+    option (google.api.http) = {
+      get: "/gdt/v1/adgroup/list"
+    };
+  };
+}
+
+message AdgroupInfo {
+  int64 adgroup_id = 1;
+  string adgroup_name = 2;
+  int64 advertiser_id = 3;
+  int64 company_id = 4;
+  string configured_status = 5;
+  string begin_date = 6;
+  string end_date = 7;
+  string time_series = 8;
+  int64 created_at = 9;
+  int64 updated_at = 10;
+}
+
+message CreateAdgroupRequest {
+  AdgroupInfo adgroup = 1;
+}
+message CreateAdgroupReply {
+  response.ResMsg res_msg = 1;
+  message Data {
+    int64 adgroup_id = 1;
+  };
+  Data data = 2;
+}
+
+message UpdateAdgroupRequest {}
+message UpdateAdgroupReply {}
+
+message DeleteAdgroupRequest {
+  int64 advertiser_id = 1;
+  repeated int64 adgroup_id = 2;
+}
+message DeleteAdgroupReply {
+  message error_adgroup_id {
+    int64 adgroup_id = 1;
+  };
+  repeated error_adgroup_id error_adgroup_ids = 1;
+}
+
+message GetAdgroupRequest {
+  repeated int64 adgroup_id = 1;
+}
+message GetAdgroupReply {
+  repeated AdgroupInfo adgroups = 1;
+}
+
+message ListAdgroupRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  repeated int64 adgroup_id = 3;
+  string adgroup_name = 4;
+  repeated int64 advertiser_id = 5;
+}
+message ListAdgroupReply {
+  response.ResMsg res_msg = 1;
+  message Data {
+    response.PageInfo page_info = 1;
+    repeated AdgroupInfo list = 2;
+  };
+  Data data = 2;
+}

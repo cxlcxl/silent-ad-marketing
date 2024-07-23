@@ -1,7 +1,7 @@
 package data
 
 import (
-	"ad-marketing/app/adgroup/internal/biz"
+	"ad-marketing/app/gdt/adgroup/internal/biz"
 	"context"
 
 	"github.com/go-kratos/kratos/v2/log"

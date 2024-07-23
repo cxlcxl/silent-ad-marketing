@@ -3,20 +3,26 @@ package biz
 import (
 	"context"
 
-	v1 "ad-marketing/api/helloworld/v1"
-
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
 )
 
 var (
 	// ErrUserNotFound is user not found.
-	ErrUserNotFound = errors.NotFound(v1.ErrorReason_USER_NOT_FOUND.String(), "user not found")
+	ErrUserNotFound = errors.NotFound("", "user not found")
 )
 
 type Adgroup struct {
-	AdgroupId   int64
-	AdgroupName string
+	AdgroupId        int64
+	AdgroupName      string
+	AdvertiserId     int64
+	CompanyId        int64
+	ConfiguredStatus string
+	BeginDate        string
+	EndDate          string
+	TimeSeries       string
+	CreatedAt        int64
+	UpdatedAt        int64
 }
 
 // AdgroupRepo is a Greater repo.

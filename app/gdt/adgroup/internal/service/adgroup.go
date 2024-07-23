@@ -1,11 +1,11 @@
 package service
 
 import (
-	"ad-marketing/app/adgroup/internal/biz"
+	"ad-marketing/app/gdt/adgroup/internal/biz"
 	"context"
 	"github.com/jinzhu/copier"
 
-	pb "ad-marketing/api/adgroup/v1"
+	pb "ad-marketing/api/gdt/adgroup/v1"
 )
 
 func (s *AdgroupService) CreateAdgroup(ctx context.Context, req *pb.CreateAdgroupRequest) (*pb.CreateAdgroupReply, error) {

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.4.0
 // - protoc             v5.26.1
-// source: adgroup/v1/adgroup.proto
+// source: gdt/adgroup/v1/adgroup.proto
 
 package v1
 
@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Adgroup_CreateAdgroup_FullMethodName = "/api.adgroup.v1.Adgroup/CreateAdgroup"
-	Adgroup_UpdateAdgroup_FullMethodName = "/api.adgroup.v1.Adgroup/UpdateAdgroup"
-	Adgroup_DeleteAdgroup_FullMethodName = "/api.adgroup.v1.Adgroup/DeleteAdgroup"
-	Adgroup_GetAdgroup_FullMethodName    = "/api.adgroup.v1.Adgroup/GetAdgroup"
-	Adgroup_ListAdgroup_FullMethodName   = "/api.adgroup.v1.Adgroup/ListAdgroup"
+	Adgroup_CreateAdgroup_FullMethodName = "/api.gdt.adgroup.v1.Adgroup/CreateAdgroup"
+	Adgroup_UpdateAdgroup_FullMethodName = "/api.gdt.adgroup.v1.Adgroup/UpdateAdgroup"
+	Adgroup_DeleteAdgroup_FullMethodName = "/api.gdt.adgroup.v1.Adgroup/DeleteAdgroup"
+	Adgroup_GetAdgroup_FullMethodName    = "/api.gdt.adgroup.v1.Adgroup/GetAdgroup"
+	Adgroup_ListAdgroup_FullMethodName   = "/api.gdt.adgroup.v1.Adgroup/ListAdgroup"
 )
 
 // AdgroupClient is the client API for Adgroup service.
@@ -233,7 +233,7 @@ func _Adgroup_ListAdgroup_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Adgroup_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.adgroup.v1.Adgroup",
+	ServiceName: "api.gdt.adgroup.v1.Adgroup",
 	HandlerType: (*AdgroupServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -258,5 +258,5 @@ var Adgroup_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "adgroup/v1/adgroup.proto",
+	Metadata: "gdt/adgroup/v1/adgroup.proto",
 }

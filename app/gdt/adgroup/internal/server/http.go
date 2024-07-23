@@ -1,9 +1,9 @@
 package server
 
 import (
-	v1 "ad-marketing/api/adgroup/v1"
-	"ad-marketing/app/adgroup/internal/conf"
-	"ad-marketing/app/adgroup/internal/service"
+	v1 "ad-marketing/api/gdt/adgroup/v1"
+	"ad-marketing/app/gdt/adgroup/internal/conf"
+	"ad-marketing/app/gdt/adgroup/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package api.common.advertiser.v1;
+
+option go_package = "ad-marketing/api/common/advertiser/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.common.advertiser.v1";
+
+service Advertiser {
+	rpc CreateAdvertiser (CreateAdvertiserRequest) returns (CreateAdvertiserReply);
+	rpc UpdateAdvertiser (UpdateAdvertiserRequest) returns (UpdateAdvertiserReply);
+	rpc DeleteAdvertiser (DeleteAdvertiserRequest) returns (DeleteAdvertiserReply);
+	rpc GetAdvertiser (GetAdvertiserRequest) returns (GetAdvertiserReply);
+	rpc ListAdvertiser (ListAdvertiserRequest) returns (ListAdvertiserReply);
+}
+
+message CreateAdvertiserRequest {}
+message CreateAdvertiserReply {}
+
+message UpdateAdvertiserRequest {}
+message UpdateAdvertiserReply {}
+
+message DeleteAdvertiserRequest {}
+message DeleteAdvertiserReply {}
+
+message GetAdvertiserRequest {}
+message GetAdvertiserReply {}
+
+message ListAdvertiserRequest {}
+message ListAdvertiserReply {}
